@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gmail Message Export</title>
+    <link rel="stylesheet" href="popup.css">
+  </head>
+  <body>
+    <main class="popup">
+      <h1 class="popup__title">Gmail Message Export</h1>
+      <div class="popup__actions">
+        <button id="save" type="button" class="popup__button">
+          Save Markdown
+        </button>
+        <button id="copy" type="button" class="popup__button">
+          Copy Markdown
+        </button>
+      </div>
+      <p id="status" class="popup__status" role="status" aria-live="polite"></p>
+    </main>
+    <script type="module" src="popup.js"></script>
+  </body>
+</html>

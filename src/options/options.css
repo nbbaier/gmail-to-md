@@ -1,0 +1,69 @@
+:root {
+  font-family: system-ui, sans-serif;
+  color-scheme: light dark;
+}
+
+body {
+  margin: 0;
+}
+
+.options {
+  max-width: 480px;
+  padding: 24px 16px;
+  margin: 0 auto;
+}
+
+.options__title {
+  margin: 0 0 16px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.options__form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.options__field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.options__label {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.options__input {
+  padding: 8px;
+  font-size: 13px;
+  color: inherit;
+  background: transparent;
+  border: 1px solid currentColor;
+  border-radius: 6px;
+}
+
+.options__hint {
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.options__button {
+  align-self: flex-start;
+  padding: 8px 12px;
+  font-size: 13px;
+  color: inherit;
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid currentColor;
+  border-radius: 6px;
+}
+
+.options__status {
+  min-height: 1em;
+  margin: 0;
+  font-size: 12px;
+  opacity: 0.8;
+}

@@ -1,0 +1,49 @@
+:root {
+  font-family: system-ui, sans-serif;
+  color-scheme: light dark;
+}
+
+body {
+  margin: 0;
+}
+
+.popup {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 220px;
+  padding: 16px;
+}
+
+.popup__title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.popup__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.popup__button {
+  padding: 8px 12px;
+  font-size: 13px;
+  color: inherit;
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid currentColor;
+  border-radius: 6px;
+}
+
+.popup__button:hover {
+  opacity: 0.8;
+}
+
+.popup__status {
+  min-height: 1em;
+  margin: 0;
+  font-size: 12px;
+  opacity: 0.8;
+}
