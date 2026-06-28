@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gmail Message Export — Options</title>
+    <link rel="stylesheet" href="options.css">
+  </head>
+  <body>
+    <main class="options">
+      <h1 class="options__title">Gmail Message Export</h1>
+      <form id="settings" class="options__form">
+        <label class="options__field">
+          <span class="options__label">Save Location</span>
+          <input
+            id="save-location"
+            name="save-location"
+            type="text"
+            class="options__input"
+            placeholder="Downloads root"
+            autocomplete="off"
+          >
+          <span class="options__hint">
+            Optional subfolder within Chrome's Downloads directory. Leave blank
+            to save at the root.
+          </span>
+        </label>
+        <button type="submit" class="options__button">Save settings</button>
+        <p
+          id="status"
+          class="options__status"
+          role="status"
+          aria-live="polite"
+        ></p>
+      </form>
+    </main>
+    <script type="module" src="options.js"></script>
+  </body>
+</html>
