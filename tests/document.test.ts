@@ -50,6 +50,16 @@ describe("generateExportDocument", () => {
     expect(doc.content).not.toContain("](");
   });
 
+  test("escapes Markdown in attachment filenames so they never render as links", () => {
+    const doc = generateExportDocument(
+      message({ attachments: ["[invoice](https://example.com).pdf"] })
+    );
+    expect(doc.content).toContain(
+      "- \\[invoice\\]\\(https://example.com\\).pdf"
+    );
+    expect(doc.content).not.toContain("](");
+  });
+
   test("uses LF line endings with no carriage returns", () => {
     const doc = generateExportDocument(
       message({ bodyHtml: "<p>line one</p>\r\n<p>line two</p>" })
