@@ -1,4 +1,9 @@
 {
+  "name": "gmail-to-md",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Chrome MV3 extension that exports the selected Gmail message as a Markdown document.",
   "devDependencies": {
     "@biomejs/biome": "2.4.16",
     "@types/chrome": "^0.0.287",
@@ -6,7 +11,6 @@
     "ultracite": "7.8.3",
     "@types/bun": "latest"
   },
-  "name": "gmail-to-md",
   "scripts": {
     "build": "bun run build.ts",
     "dev": "bun run build.ts --watch",
@@ -16,9 +20,5 @@
     "test": "bun test",
     "check": "ultracite check && tsc --noEmit && bun test",
     "fix": "ultracite fix"
-  },
-  "type": "module",
-  "version": "0.1.0",
-  "private": true,
-  "description": "Chrome MV3 extension that exports the selected Gmail message as a Markdown document."
+  }
 }
