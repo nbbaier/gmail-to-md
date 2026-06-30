@@ -3,3 +3,7 @@ dist/
 *.log
 .DS_Store
 .cursor/hooks/state/continual-learning*
+
+# Local scratch / manual testing (not committed)
+manual-test.ts
+manual-test.*.ts
