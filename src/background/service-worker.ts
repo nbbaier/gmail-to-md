@@ -1,13 +1,20 @@
 /**
  * Background service worker.
  *
- * For the scaffold slice this only confirms the worker loads. Later slices wire
- * up message handling for the Save (downloads) and Copy (offscreen clipboard)
- * delivery modes described in the PRD.
+ * Routes Save and Copy requests from the popup to their delivery modes. The
+ * routing and delivery logic itself lives in `router.ts`, `save.ts`, and
+ * `copy.ts` so it can be unit tested without a real Chrome runtime.
  */
+import type { ExportMessage } from "./messages.ts";
+import { routeExportMessage } from "./router.ts";
 
 chrome.runtime.onInstalled.addListener(() => {
   console.info("[gmail-to-md] service worker installed");
 });
 
-export {};
+chrome.runtime.onMessage.addListener(
+  (message: ExportMessage, _sender, sendResponse) => {
+    routeExportMessage(message).then(sendResponse);
+    return true;
+  }
+);

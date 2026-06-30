@@ -1,14 +1,17 @@
 /**
  * Options page entry point.
  *
- * For the scaffold slice this renders a single Save Location field and persists
- * it to Chrome local storage. Validation of the subfolder value is added in a
- * later slice alongside the Save pipeline.
+ * Renders the single Save Location field (PRD): an optional subfolder under
+ * Chrome's configured Downloads directory, stored in local (unsynced)
+ * extension storage. The field can be viewed, edited, validated, saved, and
+ * cleared back to the Downloads root default.
  */
-
-export {};
-
-const STORAGE_KEY = "saveLocation";
+import {
+  clearSaveLocation,
+  getSaveLocation,
+  setSaveLocation,
+  validateSaveLocation,
+} from "../settings/save-location.ts";
 
 function setStatus(message: string): void {
   const status = document.getElementById("status");
@@ -26,9 +29,7 @@ async function load(): Promise<void> {
   if (!input) {
     return;
   }
-  const stored = await chrome.storage.local.get(STORAGE_KEY);
-  const value = stored[STORAGE_KEY];
-  input.value = typeof value === "string" ? value : "";
+  input.value = await getSaveLocation();
 }
 
 document
@@ -39,9 +40,30 @@ document
     if (!input) {
       return;
     }
-    await chrome.storage.local.set({ [STORAGE_KEY]: input.value.trim() });
+    const result = validateSaveLocation(input.value);
+    if (!result.ok) {
+      setStatus(result.error ?? "Invalid Save Location.");
+      return;
+    }
+    await setSaveLocation(result.value);
+    input.value = result.value;
     setStatus("Saved.");
   });
+
+document.getElementById("clear")?.addEventListener("click", () => {
+  clearSaveLocation()
+    .then(() => {
+      const input = getInput();
+      if (input) {
+        input.value = "";
+      }
+      setStatus("Cleared. Saving at the Downloads root.");
+    })
+    .catch((error: unknown) => {
+      console.error(error);
+      setStatus("Failed to clear Save Location.");
+    });
+});
 
 load().catch((error: unknown) => {
   console.error(error);
