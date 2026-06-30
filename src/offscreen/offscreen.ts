@@ -29,14 +29,39 @@ chrome.runtime.onMessage.addListener(
       return;
     }
 
-    navigator.clipboard.writeText(message.text).then(
-      () => sendResponse({ ok: true }),
-      (error: unknown) =>
-        sendResponse({
-          ok: false,
-          error: error instanceof Error ? error.message : String(error),
-        })
-    );
-    return true;
+    try {
+      writeToClipboard(message.text);
+      sendResponse({ ok: true });
+    } catch (error) {
+      sendResponse({
+        ok: false,
+        error: error instanceof Error ? error.message : String(error),
+      });
+    }
+    return false;
   }
 );
+
+/**
+ * Offscreen documents never receive window focus, which makes
+ * `navigator.clipboard.writeText` throw "Document is not focused." Use the
+ * legacy `execCommand("copy")` path via a selectable textarea instead — it
+ * does not require focus.
+ */
+function writeToClipboard(text: string): void {
+  const buffer = document.getElementById(
+    "clipboard-buffer"
+  ) as HTMLTextAreaElement | null;
+  if (!buffer) {
+    throw new Error("Offscreen clipboard buffer is missing.");
+  }
+
+  buffer.value = text;
+  buffer.select();
+  const copied = document.execCommand("copy");
+  buffer.value = "";
+
+  if (!copied) {
+    throw new Error("execCommand('copy') was rejected by the browser.");
+  }
+}
