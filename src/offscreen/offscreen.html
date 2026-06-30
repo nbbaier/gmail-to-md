@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Gmail Message Export — offscreen</title>
+    <style>
+    /*
+             * execCommand("copy") needs a real, selectable element — not
+             * display:none/hidden — so this is moved off-screen instead.
+             */
+    #clipboard-buffer {
+      position: fixed;
+      top: -9999px;
+      left: -9999px;
+    }
+    </style>
+  </head>
+  <body>
+    <textarea id="clipboard-buffer"></textarea>
+    <script type="module" src="offscreen.js"></script>
+  </body>
+</html>

@@ -21,6 +21,7 @@ const ENTRYPOINTS = [
   "src/popup/popup.ts",
   "src/options/options.ts",
   "src/background/service-worker.ts",
+  "src/offscreen/offscreen.ts",
 ];
 
 async function build(): Promise<void> {
